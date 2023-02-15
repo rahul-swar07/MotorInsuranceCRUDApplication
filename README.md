@@ -1,2 +1,2 @@
 # MotorInsuranceCRUDApplication
-Demo project in Spring Boot integrated with integrated MongoDB for testing Motor Insurance CRUD operations.
+Demo project in Spring Boot integrated with MongoDB for testing Motor Insurance CRUD operations.
