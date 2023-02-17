@@ -2,9 +2,9 @@ package com.turtlemint.MotorInsuranceCRUDApplication.service;
 
 import com.turtlemint.MotorInsuranceCRUDApplication.model.Insurer;
 import com.turtlemint.MotorInsuranceCRUDApplication.model.Profile;
-import com.turtlemint.MotorInsuranceCRUDApplication.model.Quote;
+import com.turtlemint.MotorInsuranceCRUDApplication.model.Quotation;
 import com.turtlemint.MotorInsuranceCRUDApplication.repository.ProfileRepository;
-import com.turtlemint.MotorInsuranceCRUDApplication.repository.QuoteRepository;
+import com.turtlemint.MotorInsuranceCRUDApplication.repository.QuotationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,9 +12,9 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class QuoteService {
+public class QuotationService {
     @Autowired
-    private QuoteRepository quoteRepository;
+    private QuotationRepository quotationRepository;
 
     @Autowired
     private ProfileRepository profileRepository;
@@ -22,32 +22,32 @@ public class QuoteService {
     public List<Insurer> getAllInsurers(long id) {
         Profile profile = profileRepository.findById(id).get();
         String vertical = profile.getVertical(), vehicleMake = profile.getVehicleMake(), vehicleModel = profile.getVehicleModel();
-        Quote quote = quoteRepository.findByQuoteVerticalAndQuoteVehicleMakeAndQuoteVehicleModel(vertical, vehicleMake, vehicleModel);
-        return quote.getSupportedInsurers();
+        Quotation quotation = quotationRepository.findByQuoteVerticalAndQuoteVehicleMakeAndQuoteVehicleModel(vertical, vehicleMake, vehicleModel);
+        return quotation.getSupportedInsurers();
     }
 
-    public void createQuote(Quote quote){
+    public void createQuote(Quotation quotation){
         long id = Math.round(Math.random() * 1e5);
         while(getAQuote(id).isPresent()){
             id = Math.round(Math.random() * 1e5);
         }
-        quote.setQuoteId(id);
-        quoteRepository.save(quote);
+        quotation.setQuoteId(id);
+        quotationRepository.save(quotation);
     }
 
-    public List<Quote> getAllQuotes(){
-        return quoteRepository.findAll();
+    public List<Quotation> getAllQuotes(){
+        return quotationRepository.findAll();
     }
 
-    public Optional<Quote> getAQuote(long id){
-        return quoteRepository.findById(id);
+    public Optional<Quotation> getAQuote(long id){
+        return quotationRepository.findById(id);
     }
 
-    public void updateQuote(Quote quote){
-        quoteRepository.save(quote);
+    public void updateQuote(Quotation quotation){
+        quotationRepository.save(quotation);
     }
 
     public void deleteQuote(long id){
-        quoteRepository.deleteById(id);
+        quotationRepository.deleteById(id);
     }
 }

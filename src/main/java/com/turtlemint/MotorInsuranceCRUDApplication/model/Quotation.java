@@ -8,7 +8,7 @@ import java.util.List;
 
 @Data
 @Document(collection = "quotesSetup")
-public class Quote {
+public class Quotation {
     @Id
     private long quoteId;
     private String quoteVertical;
@@ -17,7 +17,7 @@ public class Quote {
     
     private List<Insurer> supportedInsurers;
 
-    public Quote(long quoteId, String quoteVertical, String quoteVehicleMake, String quoteVehicleModel, List<Insurer> supportedInsurers) {
+    public Quotation(long quoteId, String quoteVertical, String quoteVehicleMake, String quoteVehicleModel, List<Insurer> supportedInsurers) {
         this.quoteId = quoteId;
         this.quoteVertical = quoteVertical;
         this.quoteVehicleMake = quoteVehicleMake;

@@ -25,8 +25,8 @@ public class ProfileController {
     }
 
     @GetMapping("/profiles/{id}")
-    public Optional<Profile> getAProfile(@PathVariable long id){
-        return profileService.getAProfile(id);
+    public Optional<Profile> getProfile(@PathVariable long id){
+        return profileService.getProfile(id);
     }
 
     @PutMapping("/profiles/{id}")

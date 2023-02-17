@@ -15,7 +15,7 @@ public class ProfileService {
 
     public void createProfile(Profile profile){
         long id = Math.round(Math.random() * 1e5);
-        while(getAProfile(id).isPresent()){
+        while(getProfile(id).isPresent()){
             id = Math.round(Math.random() * 1e5);
         }
         profile.setRequestId(id);
@@ -26,7 +26,7 @@ public class ProfileService {
         return profileRepository.findAll();
     }
 
-    public Optional<Profile> getAProfile(long id){
+    public Optional<Profile> getProfile(long id){
         return profileRepository.findById(id);
     }
 
