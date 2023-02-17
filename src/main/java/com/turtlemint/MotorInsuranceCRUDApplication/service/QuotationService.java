@@ -26,28 +26,28 @@ public class QuotationService {
         return quotation.getSupportedInsurers();
     }
 
-    public void createQuote(Quotation quotation){
+    public void createQuotation(Quotation quotation){
         long id = Math.round(Math.random() * 1e5);
-        while(getAQuote(id).isPresent()){
+        while(getQuotation(id).isPresent()){
             id = Math.round(Math.random() * 1e5);
         }
         quotation.setQuoteId(id);
         quotationRepository.save(quotation);
     }
 
-    public List<Quotation> getAllQuotes(){
+    public List<Quotation> getAllQuotations(){
         return quotationRepository.findAll();
     }
 
-    public Optional<Quotation> getAQuote(long id){
+    public Optional<Quotation> getQuotation(long id){
         return quotationRepository.findById(id);
     }
 
-    public void updateQuote(Quotation quotation){
+    public void updateQuotation(Quotation quotation){
         quotationRepository.save(quotation);
     }
 
-    public void deleteQuote(long id){
+    public void deleteQuotation(long id){
         quotationRepository.deleteById(id);
     }
 }

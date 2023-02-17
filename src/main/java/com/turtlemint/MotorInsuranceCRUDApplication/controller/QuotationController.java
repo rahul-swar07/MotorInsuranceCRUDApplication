@@ -19,25 +19,25 @@ public class QuotationController {
     }
 
     @PostMapping("/quotes")
-    public String createQuote(@RequestBody Quotation quotation){
-        quotationService.createQuote(quotation);
+    public String createQuotation(@RequestBody Quotation quotation){
+        quotationService.createQuotation(quotation);
         return "Created Quote with id = " + quotation.getQuoteId();
     }
 
     @GetMapping("/quotes")
     public List<Quotation> getAllQuotes(){
-        return quotationService.getAllQuotes();
+        return quotationService.getAllQuotations();
     }
 
     @PutMapping("/quotes/{id}")
-    public String updateQuote(@PathVariable long id, @RequestBody Quotation quotation){
-        quotationService.updateQuote(quotation);
+    public String updateQuotation(@PathVariable long id, @RequestBody Quotation quotation){
+        quotationService.updateQuotation(quotation);
         return "Updated Quote with id = " + id;
     }
 
     @DeleteMapping("/quotes/{id}")
-    public String deleteQuote(@PathVariable long id){
-        quotationService.deleteQuote(id);
+    public String deleteQuotation(@PathVariable long id){
+        quotationService.deleteQuotation(id);
         return "Deleted Quote with id = " + id;
     }
 }
