@@ -1,10 +1,14 @@
 package com.turtlemint.MotorInsuranceCRUDApplication.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Document(collection = "profileSetup")
 public class Profile {
     @Id
@@ -12,24 +16,23 @@ public class Profile {
     private String vertical;
     private String vehicleMake;
     private String vehicleModel;
-
-    public Profile(long requestId, String vertical, String vehicleMake, String vehicleModel) {
-        this.requestId = requestId;
-        this.vertical = vertical;
-        this.vehicleMake = vehicleMake;
-        this.vehicleModel = vehicleModel;
-    }
 }
 
-// /quotes/requestId (better) or /quotes and send requestbody. <---------> DONE
+
+
+
+
+// /quotes/requestId (better) or /quotes and send RequestBody. <---------> DONE
 // fetch profile on basis of requestId --> fetch supportedInsurers on the basis of profile from datasetup collection <-----------> DONE
 
-// /checkout/requestId and input insurer name <-----------> ONTO THIS
+// /checkout/requestId and input insurer name <-----------> DONE
 // {
-//       insurer : insurerName,
-//       custormermobile,
-//       customername
+//       insurer : insurerName, insurerPremium
+//       customer : customerName, customerEmail, customerMobile,
+//       requestId
 // }
 // save.
 
-//payment api, requestId, and amount pay (mock), save (success/failure) on db.
+//payment api, requestId, and amount pay (mock), save (success/failure) on db. <----------> ONTO THIS
+
+//unit testing using junit.

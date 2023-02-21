@@ -6,35 +6,37 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class ProfileService {
     @Autowired
     private ProfileRepository profileRepository;
 
-    public void createProfile(Profile profile){
-        long id = Math.round(Math.random() * 1e5);
-        while(getProfile(id).isPresent()){
-            id = Math.round(Math.random() * 1e5);
+    public Profile createProfile(Profile profile){
+        long requestId = Math.round(Math.random() * 1e9);
+        while(profileRepository.findById(requestId) != null){
+            requestId = Math.round(Math.random() * 1e9);
         }
-        profile.setRequestId(id);
+        profile.setRequestId(requestId);
         profileRepository.save(profile);
+        return profile;
     }
 
     public List<Profile> getAllProfiles(){
         return profileRepository.findAll();
     }
 
-    public Optional<Profile> getProfile(long id){
-        return profileRepository.findById(id);
+    public Profile getProfile(long requestId){
+        return profileRepository.findById(requestId);
     }
 
-    public void updateProfile(Profile profile) {
+    public Profile updateProfile(long requestId, Profile profile) {
+        profile.setRequestId(requestId);
         profileRepository.save(profile);
+        return profile;
     }
 
-    public void deleteProfile(long id){
-        profileRepository.deleteById(id);
+    public void deleteProfile(long requestId){
+        profileRepository.deleteById(requestId);
     }
 }

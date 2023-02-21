@@ -19,35 +19,45 @@ public class QuotationService {
     @Autowired
     private ProfileRepository profileRepository;
 
-    public List<Insurer> getAllInsurers(long id) {
-        Profile profile = profileRepository.findById(id).get();
+    public List<Insurer> getAllInsurers(long requestId) {
+        Profile profile = profileRepository.findById(requestId);
         String vertical = profile.getVertical(), vehicleMake = profile.getVehicleMake(), vehicleModel = profile.getVehicleModel();
-        Quotation quotation = quotationRepository.findByQuoteVerticalAndQuoteVehicleMakeAndQuoteVehicleModel(vertical, vehicleMake, vehicleModel);
+        Quotation quotation = quotationRepository.findByVerticalAndVehicleMakeAndVehicleModel(vertical, vehicleMake, vehicleModel);
         return quotation.getSupportedInsurers();
     }
 
-    public void createQuotation(Quotation quotation){
-        long id = Math.round(Math.random() * 1e5);
-        while(getQuotation(id).isPresent()){
-            id = Math.round(Math.random() * 1e5);
+    public Quotation createQuotation(Quotation quotation){
+        String AlphaNumericString = "ABCDEFGHIJKLMNOPQRSTUVWXYZ" + "0123456789" + "abcdefghijklmnopqrstuvxyz";
+        StringBuilder sb = new StringBuilder(24);
+        for (int i = 0; i < 24; i++){
+            int index = (int)(AlphaNumericString.length() * Math.random());
+            sb.append(AlphaNumericString.charAt(index));
         }
-        quotation.setQuoteId(id);
+        while(quotationRepository.findById(sb.toString()) != null) {
+            for (int i = 0; i < 24; i++){
+                int index = (int)(AlphaNumericString.length() * Math.random());
+                sb.append(AlphaNumericString.charAt(index));
+            }
+        }
+        quotation.setId(sb.toString());
         quotationRepository.save(quotation);
+        return quotation;
     }
 
     public List<Quotation> getAllQuotations(){
         return quotationRepository.findAll();
     }
 
-    public Optional<Quotation> getQuotation(long id){
-        return quotationRepository.findById(id);
-    }
-
-    public void updateQuotation(Quotation quotation){
+    public void updateQuotation(String id, Quotation quotation){
+        quotation.setId(id);
         quotationRepository.save(quotation);
     }
 
-    public void deleteQuotation(long id){
+    public void deleteQuotation(String id){
         quotationRepository.deleteById(id);
+    }
+
+    public Optional<Quotation> getQuotation(String id){
+        return quotationRepository.findById(id);
     }
 }

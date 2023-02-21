@@ -1,27 +1,22 @@
 package com.turtlemint.MotorInsuranceCRUDApplication.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.List;
 
 @Data
-@Document(collection = "quotesSetup")
+@AllArgsConstructor
+@NoArgsConstructor
+@Document(collection = "dataSetup")
 public class Quotation {
     @Id
-    private long quoteId;
-    private String quoteVertical;
-    private String quoteVehicleMake;
-    private String quoteVehicleModel;
-    
+    private String id;
+    private String vertical;
+    private String vehicleMake;
+    private String vehicleModel;
     private List<Insurer> supportedInsurers;
-
-    public Quotation(long quoteId, String quoteVertical, String quoteVehicleMake, String quoteVehicleModel, List<Insurer> supportedInsurers) {
-        this.quoteId = quoteId;
-        this.quoteVertical = quoteVertical;
-        this.quoteVehicleMake = quoteVehicleMake;
-        this.quoteVehicleModel = quoteVehicleModel;
-        this.supportedInsurers = supportedInsurers;
-    }
 }
