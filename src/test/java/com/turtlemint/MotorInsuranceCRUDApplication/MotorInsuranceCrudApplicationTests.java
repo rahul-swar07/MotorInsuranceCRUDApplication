@@ -27,7 +27,6 @@ class MotorInsuranceCrudApplicationTests {
 	@MockBean
 	private ProfileRepository profileRepository;
 
-	// JUnit Unit Tests
 	@Test
 	public void getAllProfilesTest() {
 		Profile profileTest1 = new Profile(12345, "FW", "suzuki", "swift");
@@ -64,4 +63,8 @@ class MotorInsuranceCrudApplicationTests {
 		profileService.deleteProfile(profile.getRequestId());
 		verify(profileRepository, times(1)).deleteById(profile.getRequestId());
 	}
+
+	// quotations tests
+
+	// checkout tests
 }
